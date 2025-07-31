@@ -13,7 +13,7 @@ import pandas as pd
 
 @api_view(['POST'])
 def tabula(request):
-    columns = json.loads(request.POST['columns'])
+    columns = request.POST['columns'].split(",")
 
     dfs = read_pdf(
         request.FILES['file'],
