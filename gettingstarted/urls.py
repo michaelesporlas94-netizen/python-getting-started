@@ -19,10 +19,13 @@ Including another URLconf
 from django.urls import path
 
 import hello.views
+import hello.converter
 
 urlpatterns = [
     path("", hello.views.index, name="index"),
     path("db/", hello.views.db, name="db"),
+    path("converters/tabula", hello.converter.tabula, name="tabula"),
+    path("return_file/", hello.converter.return_file, name="return_file"),
     # Uncomment this and the entry in `INSTALLED_APPS` if you wish to use the Django admin feature:
     # https://docs.djangoproject.com/en/5.2/ref/contrib/admin/
     # path("admin/", admin.site.urls),

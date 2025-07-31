@@ -1,13 +1,26 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse,JsonResponse
+from rest_framework.decorators import api_view
 from .models import Greeting
-
+import requests
+import os
+import json
 # Create your views here.
 
 
 def index(request):
-    return render(request, "index.html")
+    print(request)
+    #files = os.listdir(r"\\prod.factset.com\dfs\CCS-Application\holdings\CCAutomation")
+    files_json = json.dumps([os.getenv("AWS_ACCESS_KEY_ID")])
+    return HttpResponse('<pre>' + files_json+ '</pre>')
 
+@api_view(['POST'])
+def conv(request):
+    print(request)
+    #files = os.listdir(r"\\prod.factset.com\dfs\CCS-Application\holdings\CCAutomation")
+    #files_json = json.dumps([os.getenv("AWS_ACCESS_KEY_ID")])
+    #return HttpResponse('<pre>' + files_json+ '</pre>')
+    return HttpResponse(request.FILES["file"], content_type="application/pdf")
 
 def db(request):
     # If you encounter errors visiting the `/db/` page on the example app, check that:
